@@ -195,10 +195,11 @@ if gradeScore >= 90:
     print("You got a perfect score!")
 ```
 **Looping Statements**
-1. for loop
+1. `for in` loop
+Syntax:
 ```py
-for variable in sequence:
-  code
+for element in list:
+  code to execute
 ```
 
 ```py
@@ -206,8 +207,13 @@ letters = ['a', 'b', 'c', 'd']
 
 for letter in letters:
   print(letter)
+
+# To print the element index and element, use the enumerate() function. The for takes two variables representing index & element.
+for index, letter in enumerate(letters):
+  print(index, letter)
 ```
 **Range()**
+Ranges take up less memory than lists.
 
 Syntax: `range(stop)`
 
@@ -330,4 +336,58 @@ except NameError:
 	print("Variable used before defining it.")
 except ZeroDivisionError:
 	print("Division by zero is invalid!")
+```
+### Slicing Lists
+
+Slices return portions of a list or string.
+
+The standard syntax for a slice is `list[start:end]`, or `list[start:end:step]`. We can also do list[:] to make a copy of a list, or even `list[::-1]` to make a copy of a reversed list.
+
+```py
+first_list = [1,2,3,4,5,6]
+first_list[0:1] # [1]
+
+# if a value for end isn't provided, you'll slice to the end of the list
+first_list[1:] # [2, 3, 4, 5, 6]
+
+# if a value for start isn't provided, you'll slice from the start of the list
+first_list[:3] # [1,2,3]
+
+# get the last element in the list
+first_list[-1] # 6
+
+# start from the second to last element in the list
+first_list[-2:] # [5, 6]
+
+# There is always more than one way of doing something...
+first_list[4:] == first_list[-2:] # True
+
+# step in the opposite direction
+first_list[::-1] # [6, 5, 4, 3, 2, 1]
+
+# step in the opposite direction by two elements
+first_list[::-2] # [6, 4, 2]
+```
+### List Comprehension
+
+List comprehensions are an alternative to loops.
+
+One use is to transform a set of values from a range or another list into a new set of values.
+
+```py
+# return a list of squares
+[num**2 for num in range(10)] # [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+
+# chr() function takes in a number and returns the ascii character for the number
+[chr(num) for num in range(65,91)]
+# ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+```
+With `if` statements:
+```py
+[
+letter
+for letter in 'awesome'
+if letter in ['a','e','i','o','u']
+]
+# ['a', 'e', 'o', 'e']
 ```
