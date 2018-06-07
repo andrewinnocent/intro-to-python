@@ -4,23 +4,29 @@ I have the privilege of interning with the platform analytics software engineeri
 
 These are my notes from the course. Included in this repo are practice problems I worked through.
 
+Additional resource from [Rithm School](https://www.rithmschool.com/courses/python-fundamentals-part-1).
+
 ### Run a Program
 
 Command line: `python3 filePath`
 
 ### Variables
 
-Defining a variable is simple: variableName = value
-  - Like JavaScript, the value is assigned to the variableName
+Defining a variable is simple: variable_name = value
+  - Like JavaScript, the value is assigned to the variable_name
 
 **Four General Rules to Define a Variable**
 
 1. Start with an alphabet or `_`
-  1. variableName or _variableName
+  1. variable_name or _variable_name
 2. Case sensitive
-  1. variableName != VariableName
+  1. variable_name != variable_Name
 3. Reserved words (e.g., `print`) cannot be used
 4. Only `_` special character is allowed
+5. CAPITAL_SNAKE_CASE usually refers to constants
+6. UpperCamelCase usually refers to a class
+7. __variable_name__ private or are builtins to the language
+
 
 
 ### Data Types
@@ -29,8 +35,10 @@ Defining a variable is simple: variableName = value
 1. Number
   1. Integer = whole number like `10`
   2. Float = decimal like `3.5`
-2. String
+2. String (Unicode is default encoding)
   1. [String interpolation examples](https://www.programiz.com/python-programming/string-interpolation)
+  2. Iterable like a list
+  3. Immutable
 3. List [array]
 4. ** *Tuple* **
   1. Once defined cannot change values - immutable
@@ -56,6 +64,33 @@ Division:
 `5 / 2` returns `2.5`
 `5 // 2` returns `2`
 
+### Falsey Values
+
+```py
+# False
+bool(False)
+
+# 0
+bool(0)
+
+# None
+bool(None)
+
+# Empty string
+bool("")
+
+# Empty list
+bool([])
+
+# Empty tuple
+bool(())
+
+# Empty dictionary
+bool({})
+
+# Empty set
+bool(set())
+```
 
 ### Conditionals
 
@@ -66,19 +101,21 @@ Indentations are mandatory and important in defining where the condition belongs
 **NOTE!**
 ```py
 `if x is y`
-# `is` is the same as `==` ONLY with integers.
-number = 3
-integer = 3
-if integer is 3:
+# `is` is used to compare if object id's match (everything is Python is an object with an id). `==` is used to compare if objects have the same `value`.
+
+# `is` is "the same" as `==` ONLY with integers for a True result.
+number = 3 # id(number) => 4305328608 (in memory)
+integer = 3 # id(integer) => 4305328608 (in memory)
+if integer is 3: # same IDs in memory => True
   print("They're equal.")
 
 # same as:
-if integer == 3:
+if integer == 3: # same values => True
   print("They're equal.")
 
 # with strings, use `==`
 name = "Andrew"
-userInput = input()
+userInput = input("What's your name? ")
 
 if userInput is name:
   print("They're equal.")
@@ -87,6 +124,15 @@ if userInput is name:
 if userInput == name:
   print("They're equal.")
   # this WILL print
+```
+
+```py
+# you can string inequalities together without using the `and` keyword
+if 1 < 2 and 2 < 3:
+    print("this is ok")
+
+if 1 < 2 < 3:
+    print("this is better!")
 ```
 ```py
 gradeScore = 92
@@ -231,7 +277,7 @@ Syntax:
 # define a function
 def functionName():
   blockOfCode
-  return variableName
+  return variable_name
 
 # call/invoke a function
 functionName()

@@ -1,10 +1,10 @@
 # Check if a number is a multiple of 3 and a multiple of 7. Print "I'm a multiple of 3 & 7!" if true.
 #  Run the program in the command line: python3 conditionals.py
 
-print("Enter a number: ")
+# print("Enter a number: ")
 # `input()` allows a user input in the command line! The value is a string, hence the need in this case for `int()` to transform it to an integer.
 
-number = int(input())
+number = int(input("Enter a number: ")) # The prompt can be in the input() function.
 if number % 3 is 0 and number % 7 is 0:
     print("I'm a multiple of 3 & 7!")
 else:
@@ -24,3 +24,12 @@ else:
 while number >= 12 and number <= 27:
   print(f"{number} falls into the correct range.")
   number = number - 1
+
+if number > 2 or 2 > number:
+    print("cool!")
+
+if number == 1 and 2 == 2:
+    print("nice!")
+
+if not False:
+    print("it is true!")
