@@ -43,11 +43,21 @@ Defining a variable is simple: variable_name = value
 4. ** *Tuple* **
   1. Once defined cannot change values - immutable
   2. tupleName = (object1, object2, object3)
-  3. access similar to list, e.g. `tupleName[0]` returns `object1`
-  4. `del(tupleName)` deletes the variable from memory
+  3. access similar to list, e.g. `tuple_name[0]` returns `object1`
+  4. `del(tuple_name)` deletes the variable from memory
 5. Dictionary {object}
   1. key:value pairs
   2. **NOTE** strings must be in quotes, including the key.
+  3. literal notation: `dict = {"name": "Andrew", "car": "BMW"}`
+  4. dictionary function `dict_function = dict(key = "value", key2 = "value2")`
+    1. **NOTE** key can't be an integer when using dict()
+    2. **NOTE** key will automatically receive quotes in the output
+6. Sets
+  1. DO NOT have duplicate values
+    1. `s = set({1,1,4,4,5})` returns `{1,4,5}`
+    2. `s = {1,4,2,5}`
+  2. Elements ARE NOT ordered, i.e., cannot access an element by index
+
 
 ### Operators
 
@@ -390,4 +400,44 @@ for letter in 'awesome'
 if letter in ['a','e','i','o','u']
 ]
 # ['a', 'e', 'o', 'e']
+```
+
+### Dictionary Iteration and Comprehension
+
+- `for in` loops iterate through the keys
+
+```py
+a = dict(name = "Andrew", job = "Intern")
+
+for key in a:
+  print(key)
+
+# name
+# job
+```
+- To access both keys and value, call `items()` on the dictionary
+
+```py
+a = dict(name = "Andrew", job = "Intern")
+
+for key, value in a.items():
+  print(key, value)
+
+# name Andrew
+# job Intern
+```
+- Dictionary Comprehension
+**NOTE** I can create a dictionary using other data types through dictionary comprehensions.
+
+```py
+str1 = "ABC"
+str2 = "123"
+{str1[i]: str2[i] for i in range(0, len(str1))} # length of str1 is most important b/c that is the key
+# {'A': '1', 'B': '2', 'C': '3'}
+```
+
+```py
+num_list = [1,2,3,4]
+{ num:("even" if num % 2 == 0 else "odd") for num in num_list }
+# {1:"odd", 2:"even", 3:"odd", 4:"even"}
 ```
