@@ -25,7 +25,7 @@ Defining a variable is simple: variable_name = value
 4. Only `_` special character is allowed
 5. CAPITAL_SNAKE_CASE usually refers to constants
 6. UpperCamelCase usually refers to a class
-7. __variable_name__ private or are builtins to the language
+7. _ _variable_name_ _ (double underscore or 'dunder') private or are builtins to the language
 
 
 
@@ -52,6 +52,7 @@ Defining a variable is simple: variable_name = value
   4. dictionary function `dict_function = dict(key = "value", key2 = "value2")`
     1. **NOTE** key can't be an integer when using dict()
     2. **NOTE** key will automatically receive quotes in the output
+    3. **NOTE** dictionaries do not guarantee any kind of order
 6. Sets
   1. DO NOT have duplicate values
     1. `s = set({1,1,4,4,5})` returns `{1,4,5}`
@@ -64,7 +65,7 @@ Defining a variable is simple: variable_name = value
 Your usual suspects of: `+`, `-`, `*`, `/`, `%`, `<`, `<=`, `>`, `>=`, `==` (NO `===`), `!=`
 
 Python-specific:
-`and`, `or`, `not()` (not `&&`, `||`), `is` (instead of `==`)
+`and`, `or`, `not()` (not `&&`, `||`), `is` (in addition to `==`)
 
 **Cool Stuff**
 
@@ -283,7 +284,7 @@ for number in range(1, 8):
     print(number)
 else:
   print("All the numbers printed w/o breaking the loop.")
-# prints 1...8 & All the numbers printed w/o breaking the loop.
+# prints 1...7 & All the numbers printed w/o breaking the loop.
 ```
 
 ## Functions
@@ -302,6 +303,108 @@ functionName()
 returned = functionName()
 ```
 
+Default argument values are used to provide default values when defining a function.
+
+```py
+# Default argument value example
+def add(a=10, b=15):
+  return a + b
+
+add() # 25
+
+# New argument values can be passed:
+add(5, 3) # 8
+add(5) # 20
+add(b=8) #18
+```
+
+Keyword arguments are used when calling a function. The benefit is passing in the
+arguments in any order.
+
+```py
+# Keyword argument value example
+def add(a, b):
+  return a + b
+
+add(b=10, a=4) # 14
+```
+Variable number of function arguments using `*`. There are two ways to use it:
+1. `*` in the function definition allows any number of arguments to be passed.
+
+```py
+def example(*args):
+  print(args)
+
+example(1,2,3) # (1,2,3)
+example([1,2,3]) # ([1,2,3])
+
+# Result is a tuple with the arguments passed in.
+```
+2. (2.) `*` used in calling (invoking) a function. `*` takes an iterable and splits it into individual arguments.
+
+```py
+def add_three_nums(n1, n2, n3):
+  return n1 + n2 + n3
+
+add_three_nums(*[4,5,6]) #same as add_three_nums(4,5,6)
+```
+
+Unpacking an argument is used to convert a collection to comma separated values.
+```py
+def add_and_mult_nums(a, b, c):
+  return a + b * c
+
+nums = [1,2,3]
+nums2 = (2,3,4)
+
+add_and_mult_nums(nums) # TypeError: missing 2 required positional arguments: 'b' and 'c'
+add_and_mult_nums(*nums) # 7 (order of operations is automatic)
+
+add_and_mult_nums(nums2) # TypeError: missing 2 required positional arguments: 'b' and 'c'
+add_and_mult_nums(*nums2) # 14
+```
+Variable number of keyword arguments is to pass an unknown number of keyword arguments with `**`.
+
+```py
+def print_kwargs(a, b, **kwargs):
+    print(a, b, kwargs)
+
+print_kwargs(1, 2, awesome='sauce', test='yup') # 1 2 {'awesome': 'sauce', 'test': 'yup'}
+```
+
+Unpacking a dictionary into keyword arguments with `**`.
+
+```py
+def add_and_mult_nums(a, b, c):
+  return a + b * c
+
+data = dict(a=1, b=2, c=3)
+
+add_and_mult_nums(data) # TypeError missing 2 required positional arguments: 'b' and 'c'
+add_and_mult_nums(**data) # 7
+```
+
+Default argument types define what data type a variable is supposed to be passed.
+
+```py
+# Specifies that a and b are integers and the return value is also an integer.
+def add(a: int, b: int) -> int:
+    """This function returns the sum of two numbers""" # This is a docstring
+    return a + b   
+
+#  Specifies default parameter values as well as data types
+def add_again(a: int = 5 ,b: int = 5) -> int:
+    """This function returns the sum of two numbers with default values of 5 for a and 5 for b"""
+    return a + b
+
+add.__doc__ # 'This function returns the sum of two numbers'
+
+help(add_again) # prints more details...
+# Help on function add_again in module __main__:
+#
+# add_again(a:int=5, b:int=5) -> int
+#     This function returns the sum of two numbers with default values of 5 for a and 5 for b
+```
 ### Exception Handling
 
 The purpose is for a user to understand why something doesn't work, e.g. division by 0.
